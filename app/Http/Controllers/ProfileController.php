@@ -3,83 +3,123 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
+use function PHPUnit\Framework\isNull;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware("auth");
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
-        //
+        $user_id = Auth::id();
+        $profile = Profile::all()->where('user_id' , $user_id)->first();
+        if(empty($profile)){
+            return view("profiles.create")->with("user_name",Auth::user()->name);
+        }else{
+            return redirect()->route("home");
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $user_id = Auth::id();
+        $profile = Profile::all()->where('user_id' , $user_id)->first();
+        if(empty($profile)){
+        $input = $request->all();
+        $validator = $this->validate($request , [
+            "image" => "required|image|mimes:jpeg,png,jpg" , 
+            "coverture_image" =>"image|mimes:jpeg,png,jpg" , 
+            "description"=>"required",
+            "adresse"=>"required" , 
+            "telephone"=>"required" ,  
+        ]);
+        if($request->hasFile("image")){
+        $destination_image ="public/profiles_images" ;
+        $image = $request->file("image");
+        $imageName = "image_".$user_id.$image->getClientOriginalName(); 
+        $request->file("image")->storeAs($destination_image,$imageName);
+        $input['image'] = $imageName;
+       }
+       if($request->hasFile("coverture_image")){
+        $destination_image_coverture ="public/profiles_images_covertures" ;
+        $image_coverture = $request->file("coverture_image");
+        $imageName_coverture = "coverture_".$user_id.$image_coverture->getClientOriginalName(); 
+        $request->file("coverture_image")->storeAs($destination_image_coverture,$imageName_coverture);
+        $input['coverture_image'] = $imageName_coverture;
+       }
+       $input['user_id'] = $user_id;
+
+        $profile=Profile::create($input);
+        return redirect()->route("home")->with("message","Profile cree avec success");
+    }else{
+        return redirect()->route("home")->with("message","Profile déja cree ");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
+        
+    }
+
+  
     public function show(Profile $profile)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Profile $profile)
+  
+    public function edit()
     {
-        //
+        $user = Auth::user();
+        return view("profiles.edit")->with("profile",$user->profile);
+        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Profile $profile)
+ 
+    public function update(Request $request)
     {
-        //
-    }
+        $user_id = Auth::id();
+        $profile = Profile::all()->where("user_id" , $user_id)->first();
+            $input = $request->all();
+            $validator = $this->validate($request , [
+                "name" => "required" , 
+                "email"=> "required" , 
+                "password" => "required" ,
+                "image" => "required|image|mimes:jpeg,png,jpg" , 
+                "coverture_image" =>"image|mimes:jpeg,png,jpg" , 
+                "description"=>"required",
+                "adresse"=>"required" , 
+                "telephone"=>"required" ,  
+            ]);
+            if($request->hasFile("image")){
+            $destination_image ="public/profiles_images" ;
+            $image = $request->file("image");
+            $imageName = "image_".$user_id.$image->getClientOriginalName(); 
+            $request->file("image")->storeAs($destination_image,$imageName);
+            $input['image'] = $imageName;
+           }
+           if($request->hasFile("coverture_image")){
+            $destination_image_coverture ="public/profiles_images_covertures" ;
+            $image_coverture = $request->file("coverture_image");
+            $imageName_coverture = "coverture_".$user_id.$image_coverture->getClientOriginalName(); 
+            $request->file("coverture_image")->storeAs($destination_image_coverture,$imageName_coverture);
+            $input['coverture_image'] = $imageName_coverture;
+           }
+         
+           $profile->user->name =  $input['name']; 
+           $profile->user->name =  $input['email']; 
+           $profile->user->name =  Hash::make($input['password']); 
+           $profile->image = $input['image'] ; 
+           $profile->coverture_image = $input['coverture_image'];
+           $profile->description = $input['description'];
+          
+}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Profile $profile)
-    {
-        //
-    }
+   
+ 
 }

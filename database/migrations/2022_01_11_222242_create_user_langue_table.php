@@ -16,7 +16,7 @@ class CreateUserLangueTable extends Migration
         Schema::create('user_langue', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->foreignId("user_id")->constrained("users","id")->onDelete("cascade");
-            $table->integer('langue_id')->unsigned();
+            $table->bigInteger('langue_id')->unsigned();
             $table->foreign('langue_id')
             ->references('id')->on('langues')
             ->onDelete('cascade');

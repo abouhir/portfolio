@@ -16,7 +16,7 @@ class CreateUserCompetenceTable extends Migration
         Schema::create('user_competence', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->foreignId("user_id")->constrained("users","id")->onDelete("cascade");
-            $table->integer('competence_id')->unsigned();
+            $table->bigInteger('competence_id')->unsigned();
             $table->foreign('competence_id')
             ->references('id')->on('competences')
             ->onDelete('cascade');

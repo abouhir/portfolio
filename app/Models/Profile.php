@@ -17,4 +17,9 @@ class Profile extends Model
     "lindein" , 
     "github" , 
     "user_id"];
+   
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

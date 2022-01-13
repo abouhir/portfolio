@@ -15,8 +15,8 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->bigIncrements("id");
-            $table->string("image");
-            $table->string("coverture_image");
+            $table->string("image")->default("default_image");
+            $table->string("coverture_image")->default("default_image_coverture");
             $table->text("description");
             $table->string("adresse");
             $table->string("telephone");
