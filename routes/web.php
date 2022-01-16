@@ -36,3 +36,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get("/profile/create","ProfileController@create")->name("profile.create");
 Route::post("/profile/store","ProfileController@store")->name("profile.store");
 Route::get("/profile/edit","ProfileController@edit")->name("profile.edit");
+Route::put("/profile/update","ProfileController@update")->name("profile.update");

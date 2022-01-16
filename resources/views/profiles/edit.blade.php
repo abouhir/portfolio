@@ -4,11 +4,11 @@
 <div class="container">
     <div class="row mt-5 mb-3">
         <div class="fs-1 text-center">
-            Edit Profile
+            Edit Profile 
         </div>
     </div>
   
-    <form action="{{route("profile.store")}}" method="post" enctype="multipart/form-data">
+    <form action="{{route("profile.update")}}" method="post" enctype="multipart/form-data">
         @csrf
         @method("PUT")
           
@@ -37,7 +37,7 @@
     <div class="row mb-3">
         <label for="password" class="form-label col-md-2">Password</label>
         <div class="col-md-10">
-            <input type="password" class="form-control form-control" value="{{Crypt::decrypt($profile->user->password)}}" name="password" id="password" required>
+            <input type="password" class="form-control form-control" value="{{($profile->user->password)}}" name="password" id="password" required>
         </div>
         <div class=" offset-md-2 col-md-10 text-danger">
             @foreach ($errors->get('password') as $error)
@@ -142,4 +142,14 @@
     </div>
 </form>
 </div>
+<script>
+    var inputPassword = document.getElementById('password');
+    var password = inputPassword.value;
+    inputPassword.addEventListener('focus',(e)=>{
+        e.target.value="";
+    });
+    inputPassword.addEventListener('focusout',(e)=>{
+        e.target.value=password;
+    });
+</script>
 @endsection
