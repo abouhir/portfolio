@@ -3,83 +3,79 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experience;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExperienceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
+        $user = User::find(Auth::id());
+        $experiences = $user->experiences ; 
+        return view("experiences.index",compact("experiences"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function create()
     {
-        //
+        return view("experiences.create");
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+    $input = $this->validate($request , [
+            "titre" => "required" ,
+            "description" => "required" , 
+            "date" => "required" ,
+            "lieu" => "required"
+        ]);
+        $input['user_id'] = Auth::id();
+    $experience = Experience::create($input);
+       
+      return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Experience  $experience
-     * @return \Illuminate\Http\Response
-     */
     public function show(Experience $experience)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Experience  $experience
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Experience $experience)
+    public function edit($id)
     {
-        //
+        $experience = Experience::find($id);
+        return view("experiences.edit")->with("experience" , $experience);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Experience  $experience
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Experience $experience)
+    
+    public function update(Request $request, $id)
     {
-        //
+        $experience = Experience::find($id);
+        $input = $this->validate($request , [
+            "titre" => "required" ,
+            "description" => "required" , 
+            "date" => "required" ,
+            "lieu" => "required"
+        ]);
+
+        $experience->titre = $input['titre'];
+        $experience->description = $input['description'];
+        $experience->date=$input['date'];
+        $experience->lieu = $input['lieu'];
+
+        $experience->save();
+
+        return redirect()->back();
+
+
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Experience  $experience
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Experience $experience)
+    
+    public function destroy($id)
     {
-        //
+        $experience = Experience::find($id);
+        $experience->delete();
+        return redirect()->back();
     }
 }

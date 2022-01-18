@@ -47,4 +47,12 @@ Route::get("/competence/edit/{id}","CompetenceController@edit")->name("competenc
 Route::put("/competence/update/{id}","CompetenceController@update")->name("competence.update");
 Route::delete("/competence/delete/{id}","CompetenceController@destroy")->name("competence.delete");
 
+//experience 
+Route::get("/experiences","ExperienceController@index")->name("experience.index");
+Route::get("/experience/create","ExperienceController@create")->name("experience.create");
+Route::post("/experience/store","ExperienceController@store")->name("experience.store");
+Route::get("/experience/edit/{id}","ExperienceController@edit")->name("experience.edit");
+Route::put("/experience/update/{id}","ExperienceController@update")->name("experience.update");
+Route::delete("/experience/delete/{id}","ExperienceController@destroy")->name("experience.delete");
+
 
