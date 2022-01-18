@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Competence extends Model
 {
     use HasFactory;
+
+    protected $fillable =
+    [
+        "nom",
+        "description",
+        "logo"
+    ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

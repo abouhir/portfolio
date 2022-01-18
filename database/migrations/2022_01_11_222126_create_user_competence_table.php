@@ -13,7 +13,7 @@ class CreateUserCompetenceTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_competence', function (Blueprint $table) {
+        Schema::create('competence_user', function (Blueprint $table) {
             $table->bigIncrements("id");
             $table->foreignId("user_id")->constrained("users","id")->onDelete("cascade");
             $table->bigInteger('competence_id')->unsigned();

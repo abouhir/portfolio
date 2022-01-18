@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpKernel\Profiler\Profile as ProfilerProfile;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 use function PHPUnit\Framework\isNull;
 
@@ -76,8 +79,12 @@ class ProfileController extends Controller
 
   
     public function edit()
-    {
+    { 
         $user= Auth::user();
+        if(empty($profile)){
+            return redirect()->route("profile.create")->with("user_name",$user->name);
+        }
+       
         return view("profiles.edit")->with("profile",$user->profile);
         
     }
@@ -87,53 +94,60 @@ class ProfileController extends Controller
     {
         $user_id = Auth::id();
         $profile = Profile::all()->where("user_id" , $user_id)->first();
+        if(empty($profile)){
+            return view("profiles.create")->with("user_name",Auth::user()->name);
+        }
+        
             $input = $request->all();
-           /* $validator = $this->validate($request , [
+            $validator = $this->validate($request , [
                 "name" => "required" , 
                 "email"=> "required" , 
                 "password" => "required" ,
-                "image" => "required|image|mimes:jpeg,png,jpg" , 
+                "image" => "image|mimes:jpeg,png,jpg" , 
                 "coverture_image" =>"image|mimes:jpeg,png,jpg" , 
                 "description"=>"required",
                 "adresse"=>"required" , 
                 "telephone"=>"required" ,  
-            ]);*/
-            if($request->hasFile("image")){
-                $destination_image ="public/profiles_images" ;
-                $image = $request->file("image");
-                $imageName = "image_".$user_id.$image->getClientOriginalName(); 
-                $request->file("image")->storeAs($destination_image,$imageName);
-                $input['image'] = $imageName;
-           }
-           if($request->hasFile("coverture_image")){
-                $destination_image_coverture ="public/profiles_images_covertures" ;
-                $image_coverture = $request->file("coverture_image");
-                $imageName_coverture = "coverture_".$user_id.$image_coverture->getClientOriginalName(); 
-                $request->file("coverture_image")->storeAs($destination_image_coverture,$imageName_coverture);
-                $input['coverture_image'] = $imageName_coverture;
+            ]);
+
+            if(Hash::check($input['password'], $profile->user->password)){   
+                if($request->hasFile("image")){
+                    $destination_image ="public/profiles_images" ;
+                    $image = $request->file("image");
+                    $imageName = "image_".$user_id.$image->getClientOriginalName(); 
+                    $request->file("image")->storeAs($destination_image,$imageName);
+                    Storage::delete("public/profiles_images/".$profile->image);
+                    $input['image'] = $imageName;
+                    $profile->image= $input['image'];
+                
+                }
+                if($request->hasFile("coverture_image")){
+                    $destination_image_coverture ="public/profiles_images_covertures" ;
+                    $image_coverture = $request->file("coverture_image");
+                    $imageName_coverture = "coverture_".$user_id.$image_coverture->getClientOriginalName(); 
+                    $request->file("coverture_image")->storeAs($destination_image_coverture,$imageName_coverture);
+                    Storage::delete("public/profiles_images_coverture/".$profile->coverture_image);
+                    $input['coverture_image'] = $imageName_coverture;
+                    $profile->coverture_image= $input['coverture_image'];
            }
          
            $profile->user->name =  $input['name']; 
-           $profile->user->email =  $input['email'];
-           if(Hash::check($input['password'], $profile->user->password))    {    
-                //$profile->user->password =  Hash::make($input['password']);
-                return "succ";
-             } else{
-                 return "non";
-             }
-          // $profile->image = $input['image'] ; 
-           //$profile->coverture_image = $input['coverture_image'];
+           $profile->user->email =  $input['email'];   
+           if(!empty($input['new_password']))
+                $profile->user->password =  Hash::make($input['new_password']);  
            $profile->description = $input['description'];
            $profile->adresse = $input['adresse'];
            $profile->telephone = $input['telephone'];
            $profile->facebook = $input['facebook'];
            $profile->linkedin= $input['linkedin'];
-           //$profile->github = $input['github'];
-
+           $profile->github = $input['github'];
            $profile->save();
            $profile->user->save();
 
-           //return redirect()->back();
+           return redirect()->back()->with(["message"=>"Profile Modifier !!"]);
+        } 
+    
+        return redirect()->back()->withErrors(["message"=>"Mot de passe incorrect !!"]);
           
 }
 

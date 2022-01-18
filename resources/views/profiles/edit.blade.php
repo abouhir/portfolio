@@ -2,18 +2,65 @@
 
 @section('content')
 <div class="container">
-    <div class="row mt-5 mb-3">
+    <div class="row mt-3 mb-3">
         <div class="fs-1 text-center">
             Edit Profile 
         </div>
-    </div>
+    </div>  
+    @if ($errors->any())
+        <div class="row mt-3 mb-3">
+            <div class="alert alert-danger" role="alert">
+                {{$errors->first()}}  
+            </div>
+        </div>
+    @endif
+    @if (session("message"))
+        <div class="row mt-3 mb-3">
+            <div class="alert alert-success" role="alert">
+                {{session("message")}}  
+            </div>
+        </div>
+    @endif
+   
   
     <form action="{{route("profile.update")}}" method="post" enctype="multipart/form-data">
         @csrf
         @method("PUT")
-          
+        <div class="row" >
+                <div class="col-md-12 mb-3 ">
+                    <div class="d-flex justify-content-center">
+                        <img width="100%" height="200" class="rounded-top rounded-5"  src="{{asset("storage/profiles_images_covertures/".$profile->coverture_image)}}" alt="Profile Image" />
+                    </div>
+                </div>
+        </div>
+        <div class="row mb-3 ">
+            <label for="formFile" class="form-label col-md-2">Image Coverture</label>
+            <div class="col-md-10 ">
+                <input class="form-control form-control" name="coverture_image" id="formFile" type="file">
+            </div>
+            <div class=" offset-md-2 col-md-10 text-danger">
+                @foreach ($errors->get('coverture_image') as $error)
+                    {{"*".$error."*"}}
+                @endforeach
+            </div>
+        </div>
+
+        <div class="row mb-3" >
+           
+            <label for="image" class="form-label col-md-12">
+                <div class="d-flex justify-content-center">
+                    <img width="100" height="100" class="rounded-pill " src="{{asset("storage/profiles_images/".$profile->image)}}" alt="Profile Image" />
+                </div>
+                </label>
+                <input class="form-control form-control" name="image" id="image" type="file" hidden >
+            <div class=" offset-md-2 col-md-10 text-danger">
+                @foreach ($errors->get('image') as $error)
+                    {{"*".$error."*"}}
+                @endforeach
+            </div>
+        </div>
     <div class="row mb-3">
-        <label for="name" class="form-label col-md-2">User name</label>
+        <label for="name" class="form-label col-md-2">Username</label>
         <div class="col-md-10">
             <input class="form-control form-control" value="{{$profile->user->name}}" name="name" id="name" required >
         </div>   
@@ -37,7 +84,19 @@
     <div class="row mb-3">
         <label for="password" class="form-label col-md-2">Password</label>
         <div class="col-md-10">
-            <input type="password" class="form-control form-control" value="{{($profile->user->password)}}" name="password" id="password" required>
+            <input type="password" class="form-control"  name="password" id="password" required>
+        </div>
+        <div class=" offset-md-2 col-md-10 text-danger">
+            @foreach ($errors->get('password') as $error)
+                {{"*".$error."*"}}
+            @endforeach
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="new_password" class="form-label col-md-2">New Password</label>
+        <div class="col-md-10">
+            <input type="password" class="form-control"  name="new_password" id="new_password" >
         </div>
         <div class=" offset-md-2 col-md-10 text-danger">
             @foreach ($errors->get('password') as $error)
@@ -46,43 +105,10 @@
         </div>
     </div>
    
-    <div class="row">
-    <div class="col-md-12 mb-3">
-        <div class="d-flex justify-content-center">
-             <img width="100" height="100" class="rounded-pill " src="{{asset("storage/profiles_images/".$profile->image)}}" alt="Profile Image" />
-        </div>
-    </div>
-    </div>
-        <div class="row mb-3">
-           
-            <label for="formFile" class="form-label col-md-2">Image <span class="text-danger">*</span></label>
-            <div class="col-md-10">
-                <input class="form-control form-control" name="image" id="formFileLg" type="file" required>
-            </div>
-            <div class=" offset-md-2 col-md-10 text-danger">
-                @foreach ($errors->get('image') as $error)
-                    {{"*".$error."*"}}
-                @endforeach
-            </div>
-        </div>
-        <div class="row">
-        <div class="col-md-12 mb-3 ">
-            <div class="d-flex justify-content-center">
-            <img width="100%" height="200"  src="{{asset("storage/profiles_images_covertures/".$profile->coverture_image)}}" alt="Profile Image" />
-        </div>
-    </div>
-        </div>
-        <div class="row mb-3">
-            <label for="formFile" class="form-label col-md-2">Image Coverture</label>
-            <div class="col-md-10">
-                <input class="form-control form-control" name="coverture_image" id="formFile" type="file">
-            </div>
-            <div class=" offset-md-2 col-md-10 text-danger">
-                @foreach ($errors->get('coverture_image') as $error)
-                    {{"*".$error."*"}}
-                @endforeach
-            </div>
-        </div>
+   
+       
+    
+       
     <div class="row mb-3"> 
         <label for="description" class="form-label col-md-2">Description <span class="text-danger">*</span></label>
         <div class="col-md-10">
@@ -132,7 +158,7 @@
     <div class="row mb-3">
         <label for="linkedin" class="form-label col-md-2" >Linkedin Url </label>
         <div class="col-md-10">
-            <input type="text" class="form-control " name="linkedin" value="{{$profile->lindin}}" placeholder="Linkedin Url"/> 
+            <input type="text" class="form-control " name="linkedin" value="{{$profile->linkedin}}" placeholder="Linkedin Url"/> 
         </div>
     </div>
     <div class="row mt-5">
@@ -142,14 +168,5 @@
     </div>
 </form>
 </div>
-<script>
-    var inputPassword = document.getElementById('password');
-    var password = inputPassword.value;
-    inputPassword.addEventListener('focus',(e)=>{
-        e.target.value="";
-    });
-    inputPassword.addEventListener('focusout',(e)=>{
-        e.target.value=password;
-    });
-</script>
+
 @endsection

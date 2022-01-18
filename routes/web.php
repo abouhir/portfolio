@@ -33,7 +33,18 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//profile
 Route::get("/profile/create","ProfileController@create")->name("profile.create");
 Route::post("/profile/store","ProfileController@store")->name("profile.store");
 Route::get("/profile/edit","ProfileController@edit")->name("profile.edit");
 Route::put("/profile/update","ProfileController@update")->name("profile.update");
+
+//competence
+Route::get("/competences","CompetenceController@index")->name("competence.index");
+Route::get("/competence/create","CompetenceController@create")->name("competence.create");
+Route::post("/competence/store","CompetenceController@store")->name("competence.store");
+Route::get("/competence/edit/{id}","CompetenceController@edit")->name("competence.edit");
+Route::put("/competence/update/{id}","CompetenceController@update")->name("competence.update");
+Route::delete("/competence/delete/{id}","CompetenceController@destroy")->name("competence.delete");
+
+
