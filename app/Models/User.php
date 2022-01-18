@@ -58,4 +58,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Experience::class);
     }
+
+
+    public function formations()
+    {
+        return $this->hasMany(Formation::class);
+    }
+
+    public function langues(){
+        return $this->belongsToMany(Langue::class);
+    }
 }

@@ -55,4 +55,12 @@ Route::get("/experience/edit/{id}","ExperienceController@edit")->name("experienc
 Route::put("/experience/update/{id}","ExperienceController@update")->name("experience.update");
 Route::delete("/experience/delete/{id}","ExperienceController@destroy")->name("experience.delete");
 
+//formation 
+Route::get("/formations","FormationController@index")->name("formation.index");
+Route::get("/formation/create","FormationController@create")->name("formation.create");
+Route::post("/formation/store","FormationController@store")->name("formation.store");
+Route::get("/formation/edit/{id}","FormationController@edit")->name("formation.edit");
+Route::put("/formation/update/{id}","FormationController@update")->name("formation.update");
+Route::delete("/formation/delete/{id}","FormationController@destroy")->name("formation.delete");
+
 

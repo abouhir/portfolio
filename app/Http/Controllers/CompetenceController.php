@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Storage;
 
 class CompetenceController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware("auth");
+    }
 
     public function index(){
        $user =User::find(Auth::id());

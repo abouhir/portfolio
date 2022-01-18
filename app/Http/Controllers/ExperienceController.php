@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ExperienceController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware("auth");
+    }
    
     public function index()
     {
