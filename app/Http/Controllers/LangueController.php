@@ -36,7 +36,12 @@ class LangueController extends Controller
             "niveau" => "required"
         ]);
 
-        
+    
+
+        $langue = Langue::create($input);
+        $langue->users()->attach(Auth::id());
+
+        return redirect()->back();
     }
 
    
@@ -46,31 +51,36 @@ class LangueController extends Controller
     }
 
     
-    public function edit(Langue $langue)
+    public function edit($id)
     {
-        //
+        $langue = Langue::find($id);
+        return view("langues.edit",compact("langue"));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Langue  $langue
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Langue $langue)
+ 
+    public function update(Request $request, $id)
     {
-        //
+        $langue = Langue::find($id);
+        $input= $this->validate($request , [
+            "nom" => "required" , 
+            "niveau" => "required"
+        ]);
+        $langue->nom = $input['nom'];
+        $langue->niveau = $input['niveau'];
+
+        $langue->save();
+
+        return redirect()->back();
+
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Langue  $langue
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Langue $langue)
+   
+    public function destroy($id)
     {
-        //
+        $langue = Langue::find($id);
+        $langue->delete();
+
+        return redirect()->back();
     }
 }

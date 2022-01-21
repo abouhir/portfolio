@@ -63,4 +63,12 @@ Route::get("/formation/edit/{id}","FormationController@edit")->name("formation.e
 Route::put("/formation/update/{id}","FormationController@update")->name("formation.update");
 Route::delete("/formation/delete/{id}","FormationController@destroy")->name("formation.delete");
 
+//langue
+Route::get("/langues","LangueController@index")->name("langue.index");
+Route::get("/langue/create","LangueController@create")->name("langue.create");
+Route::post("/langue/store","LangueController@store")->name("langue.store");
+Route::get("/langue/edit/{id}","LangueController@edit")->name("langue.edit");
+Route::put("/langue/update/{id}","LangueController@update")->name("langue.update");
+Route::delete("/langue/delete/{id}","LangueController@destroy")->name("langue.delete");
+
 

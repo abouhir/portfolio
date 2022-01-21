@@ -7,13 +7,7 @@
             Create Profile
         </div>
     </div>
-    <!--<div class="row mb-3 ">
-        <div class="col-md-12">
-            <div class="fs-5">
-                {{$user_name}}
-            </div>
-        </div>
-    </div>-->
+  
     <div class="row mb-3">
         <label for="formFile" class="form-label col-md-2">User name</label>
         <div class="col-md-10">
