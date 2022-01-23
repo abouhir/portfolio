@@ -1,11 +1,37 @@
-@extends('layouts.app')
+@extends('layouts.left-menu' , 
+[
+    "page_name" =>"Profile" , 
+    "user_name" => $user_name , 
+    "action" => "create"
+])
 
 @section('content')
-<div class="container">
-    <div class="row mt-5 ">
-        <div class="fs-1 text-center">
-            Create Profile
+<form action="{{route("profile.store")}}" method="post" enctype="multipart/form-data">
+    <div class="row">
+    <div class="offset-2 col-8 img-fluid">
+        <div class="row">
+        <div class="col-12 img-fluid coverture-img "> 
+            <div class="row">  
+                <label for="coverture-image" style="margin-top: 250px;" class="form-label offset-7 col-5" >
+                    <div class="row">
+                    <a  class="btn btn-clr text-center col-12 d-grid">
+                        Changer la photo de coverture
+                    </a>
+                    <input class="form-control form-control" name="coverture_image" id="coverture-image" type="file" hidden>
+                </div>
+                </label>
+            </div>
+            <div class="row">
+                <div class=" offset-md-2 col-md-10 text-danger">
+                    @foreach ($errors->get('coverture_image') as $error)
+                        {{"*".$error."*"}}
+                    @endforeach
+                </div>
+            </div>
+          </div>
+        </div>   
         </div>
+    </div>
     </div>
   
     <div class="row mb-3">
@@ -15,7 +41,7 @@
         </div>
         
     </div>
-    <form action="{{route("profile.store")}}" method="post" enctype="multipart/form-data">
+    
         @csrf
         @method("POST")
         <div class="row mb-3">
@@ -98,5 +124,6 @@
         </div>
     </div>
 </form>
-</div>
+
+
 @endsection

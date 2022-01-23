@@ -72,3 +72,11 @@ Route::put("/langue/update/{id}","LangueController@update")->name("langue.update
 Route::delete("/langue/delete/{id}","LangueController@destroy")->name("langue.delete");
 
 
+
+
+//test 
+
+
+Route::get("/menu",function(){ return view("layouts.left-menu");});
+
+
