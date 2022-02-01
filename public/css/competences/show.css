@@ -1,0 +1,26 @@
+.show-competence{
+    height: 550px;
+}
+
+
+.titre-show-competence{
+    font-family: "Montserrat";
+    font-weight: bolder;
+}
+.description-show-competence{
+    font-family: "Montserrat";
+    font-size: 16px;
+}
+
+.logo-show-competence{
+    border-radius: 30px 30px 0px 0px;
+}
+.bg-card{
+    background-color :   transparent;
+}
+.bg-show-competence{
+    background: url("../../illustration/show-competences.svg") no-repeat fixed;
+    background-position: left 150px bottom 50px ;
+    background-size: 100% 550px;
+    width: 100%;
+}

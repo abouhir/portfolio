@@ -1,0 +1,13 @@
+.edit-profile{
+    height: 600px;
+}
+
+
+
+.bg-edit-profile{
+        background: url("../../illustration/update-profile.svg") no-repeat fixed;
+        background-position: left 150px bottom 50px ;
+        background-size: 100% 550px;
+        width: 100%;
+      
+}

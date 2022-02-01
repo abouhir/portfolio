@@ -29,7 +29,7 @@ class ProfileController extends Controller
         if(empty($profile)){
             return view("profiles.create")->with("user_name",Auth::user()->name);
         }else{
-            return redirect()->route("home");
+            return redirect()->route("profile.show");
         }
     }
 
@@ -72,20 +72,22 @@ class ProfileController extends Controller
     }
 
   
-    public function show(Profile $profile)
+    public function show()
     {
-        //
+        $user = Auth::user();
+        return view("profiles.show")->with("profile",$user->profile);
+
     }
 
   
     public function edit()
     { 
         $user= Auth::user();
-        if(empty($profile)){
+        if(empty($user->profile)){
             return redirect()->route("profile.create")->with("user_name",$user->name);
         }
        
-        return view("profiles.edit")->with("profile",$user->profile);
+        return view("profiles.edit")->with(["profile"=>$user->profile , "user_name"=>$user->name]);
         
     }
 

@@ -1,14 +1,23 @@
 .coverture-img{
-    
     background: url("../logo/img.jpg")  no-repeat ;
     background-size: 100% 300px;
     height: 300px;
     width: 100%;
-    border-radius: 0px 0px 10px 10px;
-   
+    border-radius: 0px 0px 15px 15px;
 }
 
 .profile-create{
-    height: 600px;
+    height: 560px;
+   
+}
+
+
+.bg-form{
+        background: url("../../illustration/create-profile.svg") no-repeat fixed;
+        background-position: left 90px bottom 60px ;
+        background-size: 100% 510px;
+        width: 100%;
+    
+  
 }
 

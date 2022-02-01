@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //profile
+Route::get("/profile","ProfileController@show")->name("profile.show");
 Route::get("/profile/create","ProfileController@create")->name("profile.create");
 Route::post("/profile/store","ProfileController@store")->name("profile.store");
 Route::get("/profile/edit","ProfileController@edit")->name("profile.edit");

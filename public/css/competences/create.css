@@ -1,0 +1,12 @@
+.logo-competence{
+    border-radius: 30px 30px 30px 30px;
+}
+
+
+.bg-create-competence{
+    background: url("../../illustration/create-competences.svg") no-repeat fixed;
+    background-position: left 60px bottom 70px ;
+    background-size: 100% 550px;
+    height: 550px;
+    width: 100%;
+}

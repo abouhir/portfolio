@@ -2,16 +2,14 @@
     box-shadow:0px 1px 5px 2px black;
     height: 680px;
     background-color: white;
-   
-
     }
 
 .scrollbar{
     overflow-y: scroll;
+    overflow-x: hidden;
     
 }
 .scrollbar::-webkit-scrollbar {
-     
     width: 5px;
     height: 8px;
     background-color: #CACFD4; /* or add it to the track */
@@ -20,6 +18,7 @@
   .scrollbar::-webkit-scrollbar-thumb {
       background: #7A58E7;
       border-radius: 100px;
+      
   }
 .text-menu-header{
     color: black;
@@ -28,7 +27,7 @@
 }
 .bg-img-profile{
     height: 90px;
-    background-color :   #c4c4c428;
+    background-color : #c4c4c428;
    
 }
 
@@ -109,5 +108,44 @@
     color: white;
     background-color: #7A58E7;
     font-family: "Mochiy Pop P One";
-    font-size: 12px;
+    font-size: 11px;
+}
+
+.btn-clr:hover{
+    color: #7A58E7;
+    background-color: white;
+    font-family: "Mochiy Pop P One";
+    font-size: 11px;
+}
+.btn-clr .icon-btn{
+    fill: white;
+   
+}
+
+.btn-clr:hover .icon-btn{
+    fill: #7A58E7;
+    
+}
+
+
+
+.lbl-clr{
+    color: #8F98A0;
+    font-family: "Mochiy Pop P One";
+    font-size: 13px;
+}
+
+.input-form{
+    font-family: "Mochiy Pop P One";
+    font-size: 13px;
+    
+    
+}
+.input-form:focus{
+    font-family: "Mochiy Pop P One";
+    font-size: 13px;
+    border-color: #7A58E7;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #7A58E7;
+    outline: 0 none;
+    
 }
