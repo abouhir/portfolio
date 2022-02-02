@@ -1,0 +1,25 @@
+.bg-show-formations{
+    background: url("../../illustration/create-formations.svg") no-repeat fixed;
+    background-position: left 200px bottom 70px ;
+    background-size: 100% 550px;
+    height: 550px;
+    width: 100%;
+}
+
+.titre-show-formation{
+    color: black;
+    font-family: "Mochiy Pop P One";  
+}
+.date-lieu-formation{
+    color: #8F98A0;
+    font-family: "Montserrat"; 
+    font-weight: bold; 
+    font-size: 14px;
+}
+.description-show-formation{
+    color: black;
+    font-family: "Montserrat";  
+    font-size: 17px;
+    text-align: justify;
+    
+}

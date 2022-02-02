@@ -1,12 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.left-menu',
+[
+    "page_name" =>"Langues" , 
+    "route_create" => route("formation.create"),
+    "route_show" => route("formation.index"),
+    "route_update" => route("formation.index"),
+    "action" => "create"
+])
 
 @section('content')
-<div class="container">
-    <div class="row mt-5 ">
-        <div class="fs-1 text-center">
-            Create Langue
-        </div>
-    </div>
+<div class="">
+   
   
     <form action="{{route("langue.store")}}" method="post" enctype="multipart/form-data">
         @csrf

@@ -1,9 +1,9 @@
 @extends('layouts.left-menu',
 [
-    "page_name" =>"Competence" , 
+    "page_name" =>"Competences" , 
     "route_create" => route("competence.create"),
     "route_show" => route("competence.index"),
-    "route_update" => route("competence.edit",2),
+    "route_update" => route("competence.index"),
     "action" => "create"
 ])
 

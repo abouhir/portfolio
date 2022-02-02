@@ -1,0 +1,7 @@
+.bg-create-formation{
+    background: url("../../illustration/create-formations.svg") no-repeat fixed;
+    background-position: left 200px bottom 70px ;
+    background-size: 100% 550px;
+    height: 550px;
+    width: 100%;
+}
