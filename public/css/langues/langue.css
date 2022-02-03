@@ -1,3 +1,29 @@
-.bg-create-langue{
+.bg-langue{
+    
+    background: url("../../illustration/langue.svg") no-repeat fixed;
+    background-position: left 100px bottom 70px ;
+    background-size: 100% 550px;
+    height: 550px;
+    width: 100%;
+}
+
+
+.table-title{
+    background-color: #7A58E7;
+    color: white;
+    font-family: "Mochiy Pop P One";
+    font-size: 14px;
+   
+}
+.table-text-body{
+    font-family: "Montserrat";
+    font-weight: 550;
+}
+.table-borderred{
+    border-radius: 20px 20px 0px 0px;
     
 }
+
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: rgb(122, 88, 231,0.3);
+ }
