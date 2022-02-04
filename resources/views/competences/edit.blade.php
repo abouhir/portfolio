@@ -49,7 +49,7 @@
                 <label for="description" class="form-label lbl-clr">Description <span class="text-danger">*</span> </label>
             </div>
             <div class="col-5">
-                <textarea class="form-control input-form" rows="4" name="description" placeholder="Description" required>{{$competence->description}}</textarea>  
+                <textarea class="form-control input-form scrollbar" rows="4" name="description" placeholder="Description" required>{{$competence->description}}</textarea>  
             </div>
           
         </div>

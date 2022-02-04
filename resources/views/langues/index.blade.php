@@ -81,6 +81,13 @@
       </tr>
       @endforeach
     </tbody>
+    <tfoot class="text-center ">
+      <tr class="table-title ">
+        <th scope="col">Langue </th>
+        <th scope="col">Niveau</th>
+        <th scope="col">Action</th>
+      </tr>
+    </tfoot>
   </table>
 </div>
 </div>

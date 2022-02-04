@@ -26,8 +26,11 @@
     <!--Coverture Image -->
     <div class="offset-2 col-8 img-fluid">
         <div class="row">
-        <div class="col-12  coverture-img "> 
-           
+        <div class="col-12  " style="background: url('@php echo $profile->coverture_image!='../default_image_coverture' ? asset('../storage/profiles_images_covertures/'.$profile->coverture_image) : asset('default-images/coverture-image.svg')    @endphp')  no-repeat ;
+        background-size: 100% 300px;
+        height: 300px;
+        width: 100%;
+        border-radius: 0px 0px 15px 15px;"> 
                         <div class="offset-7 col-5" style="margin-top: 230px;">
                         <div class="row">
                             <label for="coverture-image"  class="form-label " >
@@ -96,7 +99,7 @@
         </div>
            
             <div class="col-md-10">
-                <input class="form-control form-control" name="image" id="image-profile" type="file" required hidden>
+                <input class="form-control form-control" name="image" id="image-profile" type="file" hidden>
             </div>
             <div class=" offset-md-2 col-md-10 text-danger">
                 @foreach ($errors->get('image') as $error)
@@ -157,7 +160,7 @@
     
         <div class="row mt-2">
             <div class="col-12">
-                <textarea class="form-control input-form" rows="3" name="description"  placeholder="Description" required>{{$profile->description}}</textarea>  
+                <textarea class="form-control input-form scrollbar" rows="3" name="description"  placeholder="Description" required>{{$profile->description}}</textarea>  
             </div>
         </div> 
         <div class=" offset-md-2 col-md-10 text-danger">

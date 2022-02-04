@@ -9,7 +9,7 @@
 
 @section('content')
 
-<div class=" profile-create scrollbar ">
+<div class=" profile-create bg-form scrollbar ">
   
 <form action="{{route("profile.store")}}" method="post"  enctype="multipart/form-data">
     @csrf
@@ -62,7 +62,7 @@
                 <div class="row mb-3">
                 <div class="col-12">
                         <div class="col-5">
-                            <img width="100%" class="rounded-circle img-profile"  src="{{asset("logo/ABDERRAHMANE_BOUHIR.jpg")}}" class="mt-3" />
+                            <img width="100%" class="rounded-circle img-profile"  src="{{asset("default-images/img-profile.svg")}}" class="mt-3" />
                             <label for="image-profile" class="form-label">
                             <a class="btn btn-clr text-center ms-3 ">
                                 <div>
@@ -106,7 +106,7 @@
     
         <div class="row mt-2">
             <div class="col-12">
-                <textarea class="form-control input-form" rows="3" name="description" placeholder="Description" required></textarea>  
+                <textarea class="form-control input-form scrollbar" rows="3" name="description" placeholder="Description" required></textarea>  
             </div>
         </div> 
         <div class=" offset-md-2 col-md-10 text-danger">

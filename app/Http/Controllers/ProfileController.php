@@ -73,10 +73,12 @@ class ProfileController extends Controller
 
   
     public function show()
-    {
+    { 
         $user = Auth::user();
-        return view("profiles.show")->with("profile",$user->profile);
-
+        if(empty($user->profile)){ 
+        return view("profiles.create");
+    }
+    return view("profiles.show")->with("profile",$user->profile);
     }
 
   
@@ -119,6 +121,7 @@ class ProfileController extends Controller
                     $imageName = "image_".$user_id.$image->getClientOriginalName(); 
                     $request->file("image")->storeAs($destination_image,$imageName);
                     Storage::delete("public/profiles_images/".$profile->image);
+                    $request->file("image")->storeAs($destination_image,$imageName);
                     $input['image'] = $imageName;
                     $profile->image= $input['image'];
                 
@@ -127,8 +130,8 @@ class ProfileController extends Controller
                     $destination_image_coverture ="public/profiles_images_covertures" ;
                     $image_coverture = $request->file("coverture_image");
                     $imageName_coverture = "coverture_".$user_id.$image_coverture->getClientOriginalName(); 
-                    $request->file("coverture_image")->storeAs($destination_image_coverture,$imageName_coverture);
                     Storage::delete("public/profiles_images_coverture/".$profile->coverture_image);
+                    $request->file("coverture_image")->storeAs($destination_image_coverture,$imageName_coverture);
                     $input['coverture_image'] = $imageName_coverture;
                     $profile->coverture_image= $input['coverture_image'];
            }

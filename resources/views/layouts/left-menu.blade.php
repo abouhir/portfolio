@@ -31,6 +31,7 @@
     <link href=" {{ asset('css/formations/create.css') }}" rel="stylesheet" type="text/css" >
     <link href=" {{ asset('css/formations/show.css') }}" rel="stylesheet" type="text/css" >
     <link href=" {{ asset('css/langues/langue.css') }}" rel="stylesheet" type="text/css" >
+    <link href=" {{ asset('css/experiences/experience.css') }}" rel="stylesheet" type="text/css" >
 
 
 </head>
@@ -47,12 +48,12 @@
                 <div class="col-12">
                    <div class="row text-center rounded-pill mt-5 bg-img-profile">
                        <div class="col-4 p-0">
-                            <img width="100" class="rounded-circle img-profile"  src="{{asset("logo/ABDERRAHMANE_BOUHIR.jpg")}}" class="mt-3" />
+                            <img width="100" class="rounded-circle img-profile"  src="@php echo !empty(Auth::user()->profile) ? asset("storage/profiles_images/".Auth::user()->profile->image) : asset("default-images/img-profile.svg")    @endphp" class="mt-3" />
                        </div>
                        <div class="col-8 text-center mt-3 user-name">
                         @php
                         echo isset(Auth::user()->name) ? Auth::user()->name : "Abderrahmane Bouhir" ; 
-                        @endphp
+                        @endphp 
                     
                        </div>
                    </div>
@@ -166,10 +167,14 @@
 
             <div class="row text-center">
                 <div class="col-12 mt-5 mb-3">
-                    <a href="{{route("profile.create")}}" class="lien-menu">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="25" height="25" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path xmlns="http://www.w3.org/2000/svg" d="m363.335 488a24 24 0 0 1 -24 24h-226.253a80.09 80.09 0 0 1 -80-80v-352a80.09 80.09 0 0 1 80-80h226.253a24 24 0 0 1 0 48h-226.253a32.035 32.035 0 0 0 -32 32v352a32.034 32.034 0 0 0 32 32h226.253a24 24 0 0 1 24 24zm108.553-248.97-114.051-114.052a24 24 0 1 0 -33.937 33.941l73.077 73.081h-188.936a24 24 0 1 0 0 48h188.935l-73.08 73.08a24 24 0 1 0 33.941 33.941l114.051-114.05a24 24 0 0 0 0-33.941z" fill="#CACFD4" data-original="" class="icon"></path></g></svg>
-                        Logout
-                    </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline">
+                            @csrf
+                            <button type="submit" class="btn lien-menu" href="{{route("profile.create")}}" class="lien-menu">       
+                                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="25" height="25" x="0" y="0" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path xmlns="http://www.w3.org/2000/svg" d="m363.335 488a24 24 0 0 1 -24 24h-226.253a80.09 80.09 0 0 1 -80-80v-352a80.09 80.09 0 0 1 80-80h226.253a24 24 0 0 1 0 48h-226.253a32.035 32.035 0 0 0 -32 32v352a32.034 32.034 0 0 0 32 32h226.253a24 24 0 0 1 24 24zm108.553-248.97-114.051-114.052a24 24 0 1 0 -33.937 33.941l73.077 73.081h-188.936a24 24 0 1 0 0 48h188.935l-73.08 73.08a24 24 0 1 0 33.941 33.941l114.051-114.05a24 24 0 0 0 0-33.941z" fill="#CACFD4" data-original="" class="icon"></path></g></svg>
+                            Déconnexion
+                                        </button>
+                        </form>
+                   
                 </div>
            
         </div>    
@@ -315,23 +320,7 @@
                                 </g>
                                 </g></svg></a>
                         </li>
-                          <!--  <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>-->
+                        
                         @endguest
                     </ul>
                 </div>

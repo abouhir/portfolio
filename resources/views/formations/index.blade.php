@@ -13,9 +13,9 @@
 
 @if (count($formations)>0)
     
-<div class="bg-show-formations ">
+<div class="bg-show-formations scrollbar ">
 @foreach ($formations as $formation)
-<div class="offset-2 col-8 mt-4 ">
+<div class="offset-2 col-8 mt-4 mb-5 ">
   <div class="row">
   <div class="col-12">
     <span class="titre-show-formation">{{$formation->titre}}</span>
@@ -83,7 +83,7 @@
 </div>
 <div class="row">
   <div class="col-12">
-    <span class="description-show-formation">{{$formation->description}}</span>
+    <span class="description-show-formation text-break">{{$formation->description}}</span>
   </div>
 </div>
 </div>

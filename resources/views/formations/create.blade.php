@@ -37,7 +37,7 @@
         </div>
         <div class="row">
         <div class="col-8">
-            <textarea class="form-control input-form" rows="4" name="description" placeholder="Description" required></textarea>  
+            <textarea class="form-control input-form scrollbar" rows="4" name="description" placeholder="Description" required></textarea>  
         </div> 
     </div> 
 </div>

@@ -16,7 +16,7 @@
     <div class="show-profile scrollbar">
     <!-- image coverture -->
         <div class="offset-2 col-8">
-            <img width="100%" height="300px" class="coverture-img"  src="{{asset("logo/img.jpg")}}" alt="image coverture" />
+            <img width="100%" height="300px" class="coverture-img" src="@php echo $profile->coverture_image!="default_image_coverture" ? asset("storage/profiles_images_covertures/".$profile->coverture_image) : asset("default-images/coverture-image.svg")    @endphp"alt="image coverture" />
         </div>
     
     <!-- image profile , name and comptes --> 

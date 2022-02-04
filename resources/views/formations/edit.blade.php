@@ -37,7 +37,7 @@
         </div>
         <div class="row">
         <div class="col-8">
-            <textarea class="form-control input-form" rows="4" name="description" placeholder="Description" required>{{$formation->description}}</textarea>  
+            <textarea class="form-control input-form scrollbar" rows="4" name="description" placeholder="Description" required>{{$formation->description}}</textarea>  
         </div> 
     </div> 
 </div>
